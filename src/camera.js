@@ -30,7 +30,10 @@ class Camera {
         optional: []
       }
     };
-
+ var userAgent = window.navigator.userAgent;
+    if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+        constraints.video.facingMode = "environment";
+    }
     this._stream = await Camera._wrapErrors(async () => {
       return await navigator.mediaDevices.getUserMedia(constraints);
     });
